@@ -2,6 +2,38 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 // import './App.css';
 
+class Controls extends Component {
+  render() {
+    let button = {
+      border: '1px solid black',
+      textAlign: 'center',
+      cursor: 'move',
+      width: '200px',
+      height: '20px',
+      backgroundColor: 'blue',
+      color: 'white',
+      marginTop: '10px',
+      borderRadius: '5px',
+      fontFamily: 'Trebuchet MS',
+      fontWeight: 'bold'
+
+    }
+    return (
+      <div 
+        className="rounded"
+        id={this.props.type}
+        style={button} 
+        draggable="true"
+        onClick={() => this.props.onClick()}
+        onMouseEnter={() => this.props.onMouseEnter()}
+        onMouseLeave={() => this.props.onMouseLeave()}
+        onDragStart={(e) => this.props.onDragStart(e)}
+        >{this.props.type}
+        </div>
+      
+      )
+  }
+}
 class App extends Component {
   constructor(props){
     super(props);
@@ -27,6 +59,7 @@ class App extends Component {
       move: false,
       moveId: "",
     };
+    this.mouseEnter = this.mouseEnter.bind(this);
   }
   drag(e, type) {
     console.log("drag", type)
@@ -91,12 +124,50 @@ class App extends Component {
   coords(e) {
     this.setState({ x: e.pageX, y: e.pageY })
   }
-  edit() {
-    console.log("edit")
+  closeTooltip() {
+    console.log("closeToolTip")
   }
+  edit(id) {
+    console.log("edit", id)
+    let field = document.getElementById(id)
+    let tooltip = { backgroundColor: 'red'}
 
+  }
+  mouseEnter(id) {
+    console.log("mouseEnter", id)
+    let field = document.getElementById(id)
+    field.style.backgroundColor = "lightblue"
+  }
+  mouseLeave(id) {
+    console.log("mouseLeave")
+    let field = document.getElementById(id)
+    field.style.backgroundColor = "blue"
+    
+  }
+  handleClick() {
+    console.log("handle click")
+  }
+  renderControl(type) {
+    return (
+      <Controls 
+        type={type}
+        draggable="true"
+        onClick={() => this.handleClick()}
+        onMouseEnter={() => this.mouseEnter(type)}
+        onMouseLeave={() => this.mouseLeave(type)}
+        onDragStart={(e) => this.drag(e, type)}
+      
+      />
+      )
+  }
 // ============================
   render() {
+    let tooltip = {
+      backgroundColor: 'red'
+    }
+    let control = {
+      border: '1px solid black'
+    }
     let fieldList = {
       // position: 'sticky',
       border: '1px solid black',
@@ -134,27 +205,30 @@ class App extends Component {
       <div 
         id={i}
         style={{
-        top: field.yfield, 
-        left: field.xfield,
-        zIndex: '100', 
-        position: 'absolute',
-        border: '1px solid black',
-        backgroundColor: 'blue',
-        color: 'white',
-        fontFamily: 'Trebuchet MS',
-        fontWeight: 'bold',
-        width: '200px',
-        height: '20px',
-        textAlign: 'center',
-        borderRadius: '5px',
-        resize: 'both',
-        overflow: 'auto',
-        cursor: 'pointer',
+          top: field.yfield, 
+          left: field.xfield,
+          zIndex: '100', 
+          position: 'absolute',
+          border: '1px solid black',
+          backgroundColor: 'blue',
+          color: 'white',
+          fontFamily: 'Trebuchet MS',
+          fontWeight: 'bold',
+          width: '200px',
+          height: '20px',
+          textAlign: 'center',
+          borderRadius: '5px',
+          resize: 'both',
+          overflow: 'auto',
+          cursor: 'pointer',
         }}
         draggable="true"
         onDragStart={(e) => this.move(e)}
-        onClick={() => this.edit()}
-        // onDragOver={(e) => this.allowDrop(e)}
+        onClick={() => this.edit(i)}
+        onDrop={(e) => this.drop(e)}
+        onDragOver={(e) => this.allowDrop(e)}  
+        onMouseEnter={() => this.mouseEnter(i)}
+        onMouseLeave={() => this.mouseLeave(i)}
         
         >{field.boxType}</div>
     )
@@ -182,19 +256,49 @@ class App extends Component {
           <div style={left}>
             <div className="col-md-1" style={fieldList}>
               <p>State</p>
+              <div  style={control}>
               <p>x: {x}, y: {y}</p>
               <ol>{fieldlist}</ol>
+            </div>
             </div>
             </div>
             <div style={center}>
             <div className="col-md-2" style={divStyle}>
               <p>Controls</p>
+              <div style={control}>
+              <p>version 3 - Rendered Controls Comp</p>
+                {this.renderControl("textBoxR")}
+                {this.renderControl("datePickerR")}
+                
+              </div>
+              <div style={control}>
+              <p>version 2 - Controls Comp</p>
+              <Controls 
+                type="textBoxC"
+                draggable="true"
+                onClick={() => this.handleClick()}
+                onMouseEnter={() => this.mouseEnter("textBoxC")}
+                onMouseLeave={() => this.mouseLeave("textBoxC")}
+                onDragStart={(e) => this.drag(e, "textBoxC")}
+                />
+              <Controls 
+                type="datePickerC"
+                draggable="true"
+                onMouseEnter={() => this.mouseEnter("datePickerC")}
+                onMouseLeave={() => this.mouseLeave("datePickerC")}
+                onDragStart={(e) => this.drag(e, "datePickerC")}
+              />
+              </div>
+              <div style={control}>
+              <p>version 1 - HTML</p>
               <div 
                 className="rounded"
                 id="textBox"
                 style={button} 
                 draggable="true"
                 onDragStart={(e) => this.drag(e, "textBox")}
+                onMouseEnter={() => this.mouseEnter("textBox")}
+                onMouseLeave={() => this.mouseLeave("textBox")}
                 >textBox</div>
               <div 
                 id="datePicker"
@@ -202,6 +306,7 @@ class App extends Component {
                 draggable="true"
                 onDragStart={(e) => this.drag(e, "datePicker")}
                 >datePicker</div>
+            </div>
             </div>
             </div>
             <div style={right}>
