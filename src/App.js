@@ -126,6 +126,7 @@ class App extends Component {
       fontWeight: 'bold'
 
     }
+
     const fieldlist = this.state.fields.map((field, i) =>
       <li>{field.name}-{field.boxType}</li>
     )
@@ -157,16 +158,35 @@ class App extends Component {
         
         >{field.boxType}</div>
     )
+    let left = {
+      float: 'left',
+      width: '10%',
+      position: 'fixed'
+    }
+    let center = {
+      float: 'left',
+      width: '15%',
+      position: 'fixed',
+      marginLeft: '10%'
+    }
+    let right = {
+      float: 'left',
+      width: '85%',
+      marginLeft: '25%'
+    }
     const { x, y } = this.state
     return (
       <div onMouseMove={this.coords.bind(this)}>
         <div className="container-fluid">
           <div className="row">
+          <div style={left}>
             <div className="col-md-1" style={fieldList}>
               <p>State</p>
               <p>x: {x}, y: {y}</p>
               <ol>{fieldlist}</ol>
             </div>
+            </div>
+            <div style={center}>
             <div className="col-md-2" style={divStyle}>
               <p>Controls</p>
               <div 
@@ -183,6 +203,8 @@ class App extends Component {
                 onDragStart={(e) => this.drag(e, "datePicker")}
                 >datePicker</div>
             </div>
+            </div>
+            <div style={right}>
             <div className="col-md-7" >
               <p>Form</p>
               <div 
@@ -192,6 +214,7 @@ class App extends Component {
                 >
                 
               </div>
+            </div>
             </div>
             <div id="fields">
               {formRender}
