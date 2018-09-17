@@ -48,7 +48,8 @@ class App extends Component {
       //   height: 30,
       //   value: "",
       //   xfield: 674,
-      //   yfield: 93
+      //   yfield: 93,
+      //   showTooltip: false
       // }        
         ],
       dragType: "",
@@ -109,7 +110,9 @@ class App extends Component {
         name: 'none', 
         boxType: this.state.dragType, 
         xfield: x, 
-        yfield: y})
+        yfield: y,
+        showTooltip: false
+      })
       this.setState({fields: joined})
     } else {
       this.state.fields[this.state.moveId].xfield = x
@@ -129,8 +132,14 @@ class App extends Component {
   }
   edit(id) {
     console.log("edit", id)
-    let field = document.getElementById(id)
-    let tooltip = { backgroundColor: 'red'}
+    let target = "div" + id
+    let tooltip = document.getElementById(target)
+    console.log(this.state.fields[id].showTooltip)
+    if (this.state.fields[id].showTooltip === false){
+      this.setState((state, id) => ({showTooltip: true}))
+    } else {
+      this.setState((state, id) => ({showTooltip: false}))
+    }
 
   }
   mouseEnter(id) {
@@ -160,6 +169,12 @@ class App extends Component {
       />
       )
   }
+  onBlur(e, id) {
+    console.log("onBlur")
+    const fields = this.state.fields;
+    fields[id].name = e.target.value
+    this.setState({ fields })
+}
 // ============================
   render() {
     let tooltip = {
@@ -202,6 +217,7 @@ class App extends Component {
       <li>{field.name}-{field.boxType}</li>
     )
     const formRender = this.state.fields.map((field, i) =>
+    <div>
       <div 
         id={i}
         style={{
@@ -209,13 +225,13 @@ class App extends Component {
           left: field.xfield,
           zIndex: '100', 
           position: 'absolute',
-          border: '1px solid black',
+          // border: '1px solid black',
           backgroundColor: 'blue',
           color: 'white',
           fontFamily: 'Trebuchet MS',
           fontWeight: 'bold',
           width: '200px',
-          height: '20px',
+          height: '25px',
           textAlign: 'center',
           borderRadius: '5px',
           resize: 'both',
@@ -230,7 +246,17 @@ class App extends Component {
         onMouseEnter={() => this.mouseEnter(i)}
         onMouseLeave={() => this.mouseLeave(i)}
         
-        >{field.boxType}</div>
+        >
+        <input 
+          id={"input"+i}
+          type="text"
+          onBlur={(e) => this.onBlur(e, i)}/>
+        <input
+          type="checkbox"/>
+      </div>
+
+
+    </div>
     )
     let left = {
       float: 'left',
