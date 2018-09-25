@@ -18,16 +18,18 @@ class TextboxField extends Component {
         fontFamily: 'Arial',
         fontWeight: 'bold',
         width: '200px',
-        height: '35px',
+        height: 'auto',
         borderRadius: '5px',
         resize: 'both',
         overflow: 'auto',
         cursor: 'pointer',
         overflowX: 'hidden',
         overflowY: 'hidden',
+        backgroundColor: '#1CA1C1', 
+        
     }
     let innerFieldStyle = {
-      backgroundColor: '#1CA1C1', 
+      backgroundColor: 'blue', 
       margin: '3px',
       borderRadius: '6px',
       paddingLeft: '10px'
