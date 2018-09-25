@@ -20,7 +20,7 @@ class TextboxField extends Component {
         width: '200px',
         height: '35px',
         borderRadius: '5px',
-        resize: 'horizontal',
+        resize: 'both',
         overflow: 'auto',
         cursor: 'pointer',
         overflowX: 'hidden',
