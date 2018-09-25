@@ -10,7 +10,9 @@
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+<link rel="icon" href="https://enlivedental.com/images/favicon.ico" type="image/gif" sizes="16x16">    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -21,21 +23,72 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <!-- Latest compiled and minified CSS -->
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     
     <!-- Optional theme -->
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     
     <!-- Latest compiled and minified JavaScript -->
     <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>    -->
-    <title>React App</title>
+    <title>Enlive Form</title>
+    <style>
+    .toolTipOn {
+      visibility: visible;
+      opacity: 1;
+      
+      
+    }
+    .toolTipOff {
+      visibility: hidden;
+      opacity: 0;
+    }
+    .fieldHover {
+      border: 2px solid #1ca1c1;
+      margin-top: -1px;
+      margin-left: -1px;
+    }
+    .control {
+      background-color: white;
+      color: #C0C0C0;
+    }
+    .controlHover {
+      background-color: #F8F8F8;
+      color: #1ca1c1;
+      /*border: 1px solid #1ca1c1;*/
+    }
+    .button {
+      text-align: left;
+      cursor: move;
+      width: auto;
+      height: 25px;
+      margin-top: 10px;
+      padding-top: 8px;
+      font-family: Arial;
+      /*border-left: 5px solid white;*/
+      padding-left: 15px;
     
+    }
+    </style>
 
   </head>
   <body>
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
+    <div id="header" 
+      style="
+        font-family: Arial; 
+        font-size: 2em; 
+        color: gray;
+        box-shadow: 0 0 15px grey;
+        position: fixed;
+        width: 100%;
+        padding-left: 20px;
+        z-index: 10000;
+        background-color: #101c29;
+        ">
+       <img src="https://enlivedental.com/images/logo.png"  />
+    </div>
     <div id="root"></div>
     <!--
       This HTML file is a template.
