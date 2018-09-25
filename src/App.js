@@ -901,7 +901,8 @@ class App extends Component {
     }
     let divStyle = {
     //   border: '1px solid black',
-      height: '500px'
+      height: '500px',
+      marginTop: '50px'
     }
     let form = {
       // border: '1px solid black',
